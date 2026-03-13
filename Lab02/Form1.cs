@@ -14,16 +14,22 @@ namespace Lab02
         private void btnConvert_Click(object sender, EventArgs e)
         {
             string inputText = txtDecimalInput.Text.Trim();
+            if (long.TryParse(inputText, out long parsedValue) && parsedValue > 1000)
+            {
+                MessageBox.Show("–ü–æ–∂–∞–ª—É–π—Å—Ç–∞, –≤–≤–µ–¥–∏—Ç–µ —á–∏—Å–ª–æ –Ω–µ –±–æ–ª—å—à–µ 1000.", "–û—à–∏–±–∫–∞ –≤–≤–æ–¥–∞", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ClearResults();
+                return; // –ü—Ä–µ—Ä–≤–∞—Ç—å –≤—ã–ø–æ–ª–Ω–µ–Ω–∏–µ –º–µ—Ç–æ–¥–∞, –µ—Å–ª–∏ —á–∏—Å–ª–æ –±–æ–ª—å—à–µ 1000
+            }
+
             if (long.TryParse(inputText, out long decimalNumber))
             {
                 if (decimalNumber < 0)
                 {
-                    MessageBox.Show("œÓÊ‡ÎÛÈÒÚ‡, ‚‚Â‰ËÚÂ ÌÂÓÚËˆ‡ÚÂÎ¸ÌÓÂ ˜ËÒÎÓ.", "Œ¯Ë·Í‡ ‚‚Ó‰‡",
+                    MessageBox.Show("–ü–æ–∂–∞–ª—É–π—Å—Ç–∞, –≤–≤–µ–¥–∏—Ç–µ –Ω–µ–æ—Ç—Ä–∏—Ü–∞—Ç–µ–ª—å–Ω–æ–µ —á–∏—Å–ª–æ.", "–û—à–∏–±–∫–∞ –≤–≤–æ–¥–∞",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     ClearResults();
                     return;
                 }
-
                 if (NumberConverter.ConvertToAllSystems(decimalNumber, out string binary, out string octal, out string hex))
                 {
                     lblBinaryResult.Text = binary;
@@ -32,13 +38,13 @@ namespace Lab02
                 }
                 else
                 {
-                    MessageBox.Show("Œ¯Ë·Í‡ ÔË ÔÂÓ·‡ÁÓ‚‡ÌËË.", "Œ¯Ë·Í‡", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("–û—à–∏–±–∫–∞ –ø—Ä–∏ –ø—Ä–µ–æ–±—Ä–∞–∑–æ–≤–∞–Ω–∏–∏.", "–û—à–∏–±–∫–∞", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     ClearResults();
                 }
             }
             else
             {
-                MessageBox.Show("œÓÊ‡ÎÛÈÒÚ‡, ‚‚Â‰ËÚÂ ‰ÓÔÛÒÚËÏÓÂ ˆÂÎÓÂ ˜ËÒÎÓ.", "Œ¯Ë·Í‡ ‚‚Ó‰‡",
+                MessageBox.Show("–ü–æ–∂–∞–ª—É–π—Å—Ç–∞, –≤–≤–µ–¥–∏—Ç–µ –¥–æ–ø—É—Å—Ç–∏–º–æ–µ —Ü–µ–ª–æ–µ —á–∏—Å–ª–æ.", "–û—à–∏–±–∫–∞ –≤–≤–æ–¥–∞",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ClearResults();
             }
