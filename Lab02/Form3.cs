@@ -1,5 +1,4 @@
 ﻿using System;
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -18,6 +17,16 @@ namespace Lab02
         private void btnVisualizeBinary_Click(object sender, EventArgs e)
         {
             string input = txtDecimalForVisualization.Text.Trim();
+
+            if (long.TryParse(input, out long parsedValue) && parsedValue > 1000)
+            {
+                MessageBox.Show("Пожалуйста, введите число не больше 1000.", "Ошибка ввода", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                currentBinary = "";
+                currentDecimal = -1;
+                pictureBoxBinaryVisualization.Invalidate(); // Обновляем PictureBox, чтобы очистить его
+                return; // Прервать выполнение метода, если число больше 1000
+            }
+
             if (long.TryParse(input, out long dec) && dec >= 0)
             {
                 currentDecimal = dec;
@@ -36,7 +45,6 @@ namespace Lab02
         private void pictureBoxBinaryVisualization_Paint(object sender, PaintEventArgs e)
         {
             if (string.IsNullOrEmpty(currentBinary) || currentDecimal < 0) return;
-
             Graphics g = e.Graphics;
             int xStart = 10;
             int yStart = 10;
